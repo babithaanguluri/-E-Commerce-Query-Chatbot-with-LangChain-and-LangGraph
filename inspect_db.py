@@ -13,8 +13,29 @@ def inspect_database():
     tables = [row[0] for row in cursor.fetchall()]
     print(f"Found Tables: {', '.join(tables)}\n")
     
-    # 2. Print row counts
-    print("Table Row Counts:")
+    # 2. Print table schema/structures
+    print("Database Table Structures (Schema):")
+    print("-" * 60)
+    for table in tables:
+        print(f"Table: {table.upper()}")
+        cursor.execute(f"PRAGMA table_info({table});")
+        columns = cursor.fetchall()
+        for col in columns:
+            col_id, col_name, col_type, not_null, default_val, is_pk = col
+            pk_mark = " [PRIMARY KEY]" if is_pk else ""
+            nn_mark = " NOT NULL" if not_null else ""
+            print(f"  - {col_name:<20} ({col_type}){pk_mark}{nn_mark}")
+        
+        # Check for foreign keys
+        cursor.execute(f"PRAGMA foreign_key_list({table});")
+        fkeys = cursor.fetchall()
+        for fk in fkeys:
+            fk_id, seq, to_table, from_col, to_col, on_update, on_delete, match = fk
+            print(f"  * Foreign Key: {from_col} -> {to_table}({to_col})")
+        print("-" * 60)
+    
+    # 3. Print row counts
+    print("\nTable Row Counts:")
     for table in tables:
         cursor.execute(f"SELECT COUNT(*) FROM {table}")
         count = cursor.fetchone()[0]
