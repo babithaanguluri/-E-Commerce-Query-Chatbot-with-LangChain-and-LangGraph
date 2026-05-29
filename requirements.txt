@@ -1,0 +1,11 @@
+faker
+sqlalchemy
+langchain
+langchain-openai
+langchain-anthropic
+langchain-groq
+langchain-community
+langgraph
+python-dotenv
+langsmith
+langchainhub
