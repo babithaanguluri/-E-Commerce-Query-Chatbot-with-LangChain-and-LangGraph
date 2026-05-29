@@ -12,6 +12,14 @@ Business Logic:
 - No return found, order is eligible (delivered less than 30 days ago): Initiate a new return flow.
 - No return found, order is ineligible (delivered more than 30 days ago, or not delivered yet): Explain the return policy.
 
+SQL Insertion Rules:
+- CRITICAL: The `returns` table has a primary key `return_id` which is a NOT NULL String (e.g., 'R1001', 'R1002'). SQLite does not automatically autoincrement string primary keys.
+- Therefore, when inserting a new return, you MUST first query the database to find the maximum existing `return_id` using:
+  `SELECT MAX(return_id) FROM returns`
+- Parse the numeric part of the maximum ID (e.g., 'R1006' -> 1006), increment it by 1 (e.g., 1007), and prepend 'R' to construct the new unique ID (e.g., 'R1007').
+- You MUST explicitly include this new `return_id` in your `INSERT INTO returns` query, for example:
+  `INSERT INTO returns (return_id, order_id, status, reason, refund_amount) VALUES ('R1007', 'O1002', 'pending', 'customer initiated', 0.0)`
+
 Be polite and helpful.
 Respond to the user's input: {input}
 
