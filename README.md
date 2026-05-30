@@ -4,7 +4,7 @@ An intelligent customer support chatbot built using **LangGraph**, **LangChain**
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The system runs on a state-based workflow defined by a LangGraph directed graph:
 
@@ -30,7 +30,7 @@ graph TD
 
 ---
 
-## 📋 Core Requirements & Implementation Mapping
+## Core Requirements & Implementation Mapping
 
 Below is the detailed verification mapping showing how the chatbot meets all **11 Core Requirements**:
 
@@ -114,9 +114,9 @@ Below is the detailed verification mapping showing how the chatbot meets all **1
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 📦 Installation
+### Installation
 
 1. Set up a Python Virtual Environment:
    ```powershell
@@ -141,27 +141,27 @@ Below is the detailed verification mapping showing how the chatbot meets all **1
 
 ---
 
-## ⚙️ Running the Chatbot and Tests
+## Running the Chatbot and Tests
 
-### 🗄️ 1. Seed the Database
+### 1. Seed the Database
 Run the seed script to create and populate `ecommerce.db`:
 ```powershell
 python seed_db.py
 ```
 
-### 💬 2. Start Chatting
+### 2. Start Chatting
 Launch the CLI interface to interact with the chatbot:
 ```powershell
 python main.py
 ```
 
-### 🧪 3. Run Verification Suite
+### 3. Run Verification Suite
 Runs the built-in system verification scripts for local database checks, multi-turn conversational flows, context-based return routing, unknown intent handling, and unresolved same-intent escalation:
 ```powershell
 python verify_chatbot.py
 ```
 
-### 📈 4. Run LangSmith Evals
+### 4. Run LangSmith Evals
 Execute the intent classification evaluation suite:
 ```powershell
 python evals/evaluate.py
